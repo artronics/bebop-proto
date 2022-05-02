@@ -27,15 +27,15 @@ jobs:
         name: check
 
       - name: Terraform init
-        run: terraform -chdir=terraform init
+        run: terraform init
         working-directory: terraform
 
       - name: Set Terraform Workspace
         run: |
-          terraform -chdir=terraform workspace new PR$ENVIRONMENT
+          terraform workspace new PR$ENVIRONMENT
 
       - name: Terraform plan
-        run: terraform -chdir=terraform plan
+        run: terraform plan
         working-directory: terraform
 
       - name: Terraform apply
