@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-nhsd-apim-barz-temp"
+    bucket = "terraform-nhsd-apim-barz"
     region = "eu-west-2"
   }
 }

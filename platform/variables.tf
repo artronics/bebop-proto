@@ -7,7 +7,7 @@ variable "domain_name" {
 }
 
 variable "environments" {
-  default = ["dev", "pr"]
+  default = ["dev"]
 }
 
 variable "service" {
