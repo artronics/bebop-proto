@@ -27,7 +27,7 @@ jobs:
         name: check
 
       - name: Terraform init
-        run: terraform init -backend-config="key=backend"
+        run: terraform init -backend-config="key=proxy"
         working-directory: terraform
 
       - name: Set Terraform Workspace
