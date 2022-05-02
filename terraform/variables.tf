@@ -12,7 +12,10 @@ variable "service" {
 
 locals {
   environment = terraform.workspace
+  valid_envs = ["dev"]
+  infra_env = contains(local.valid_envs, local.environment) ? local.environment : "user"
 }
+
 
 locals {
   service_domain_name = "${local.environment}.api.${var.domain_name}"
