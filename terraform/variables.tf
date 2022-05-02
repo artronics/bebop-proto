@@ -17,6 +17,7 @@ locals {
 locals {
   service_domain_name = "${local.environment}.api.${var.domain_name}"
 }
+
 locals {
   name_prefix = "${var.project}-${var.service}-${local.environment}"
 }

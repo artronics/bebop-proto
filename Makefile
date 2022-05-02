@@ -1,6 +1,4 @@
-environment=dev
-
--include .env
+#-include .env
 
 tr_opt=-chdir=terraform
 tr_state=-backend-config="key=backend"
