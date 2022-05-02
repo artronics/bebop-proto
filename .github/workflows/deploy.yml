@@ -33,6 +33,7 @@ jobs:
       - name: Set Terraform Workspace
         run: |
           terraform workspace new PR$PR_NO
+          terraform workspace select PR$PR_NO
 
       - name: Terraform plan
         run: terraform plan
