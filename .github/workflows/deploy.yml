@@ -16,7 +16,6 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -30,17 +29,8 @@ jobs:
         run: terraform init -backend-config="key=proxy"
         working-directory: terraform
 
-      - name: Set Terraform Workspace
+      - name: Terraform apply
         run: |
           terraform workspace new PR$PR_NO
-          terraform workspace select PR$PR_NO
-
-      - name: Terraform plan
-        run: terraform plan
-        working-directory: terraform
-
-      - name: Terraform apply
-        # On push to master, build or change infrastructure according to Terraform configuration files
-        #      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+          terraform apply -auto-approve
         working-directory: terraform
