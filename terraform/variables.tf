@@ -3,16 +3,16 @@ variable "project" {
 }
 
 variable "domain_name" {
-  default = "artronics.me.uk"
+  default = "dev.api.platform.nhs.uk"
 }
 
 variable "service" {
-  default = "backend"
+  default = "proxy"
 }
 
-#variable "namespace" {
-#  description = "User's short username for local deployment. It's equal to environment or pipeline and infra deployments"
-#}
+locals {
+  apigee_environment = "internal-dev"
+}
 
 locals {
   environment = terraform.workspace

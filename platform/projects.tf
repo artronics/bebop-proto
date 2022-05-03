@@ -19,5 +19,4 @@ module "projects" {
 
 output "projects_zone" {
   value = module.projects
-
 }

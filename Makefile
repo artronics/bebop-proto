@@ -3,8 +3,9 @@
 tr_opt=-chdir=terraform
 tr_state=-backend-config="key=proxy"
 tr_vars=
+apigee_auth = APIGEE_ACCESS_TOKEN=$(apigee_access_token) APIGEE_ORGANIZATION=$(apigee_organization)
 
-tr_cmd = AWS_PROFILE=$(aws_profile) $(tr_vars) terraform $(tr_opt)
+tr_cmd = AWS_PROFILE=$(aws_profile) $(apigee_auth) $(tr_vars) terraform $(tr_opt)
 
 workspace:
 	$(tr_cmd) workspace new $(environment) || $(tr_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"

@@ -3,7 +3,7 @@ variable "project" {
 }
 
 variable "domain_name" {
-  default = "artronics.me.uk"
+  default = "dev.api.platform.nhs.uk"
 }
 
 variable "environments" {
@@ -18,9 +18,6 @@ locals {
   environment = terraform.workspace
 }
 
-locals {
-  service_domain_name = "${local.environment}.api.${var.domain_name}"
-}
 locals {
   name_prefix = "${var.project}-${var.service}-${local.environment}"
 }

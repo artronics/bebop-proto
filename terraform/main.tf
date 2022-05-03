@@ -7,19 +7,20 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-nhsd-apim-barz"
+    bucket = "terraform-nhsd-apim-bebop-barz"
     region = "eu-west-2"
   }
 }
 
 provider "aws" {
   region = "eu-west-2"
+  profile = "apim-dev"
 
   default_tags {
     tags = {
       project     = var.project
       environment = local.environment
-      tier        = "backend"
+      tier        = "proxy"
     }
   }
 }
