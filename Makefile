@@ -1,23 +1,32 @@
+.SILENT:
+
 -include .env
 
-tr_opt=-chdir=terraform
-tr_state=-backend-config="key=proxy"
-tr_vars=
+tf_opt=-chdir=terraform
+tf_state=-backend-config="key=proxy"
+tf_vars=
 apigee_auth = APIGEE_ACCESS_TOKEN=$(apigee_access_token) APIGEE_ORGANIZATION=$(apigee_organization)
 
-tr_cmd = AWS_PROFILE=$(aws_profile) $(apigee_auth) $(tr_vars) terraform $(tr_opt)
+tf_cmd = AWS_PROFILE=$(aws_profile) $(apigee_auth) $(tf_vars) terraform $(tf_opt)
 
 workspace:
-	$(tr_cmd) workspace new $(environment) || $(tr_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
+	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
 
 init:
-	$(tr_cmd) init $(tr_state)
+	$(tf_cmd) init $(tf_state)
 
 plan: workspace
-	$(tr_cmd) plan
+	$(tf_cmd) plan
 
 apply: workspace
-	 $(tr_cmd) apply -auto-approve
+	 $(tf_cmd) apply -auto-approve
 
 destroy: workspace
-	$(tr_cmd) destroy
+	$(tf_cmd) destroy
+
+aws-login:
+	# TODO: aws_profile here is different from terraform
+	bebop aws login --profile $(aws_profile) -a 347250048819 -u $(aws_user) --out-profile default -m $(m)
+
+apigee-login:
+	bebop apigee login --username $(apigee_user)

@@ -1,23 +1,17 @@
-locals {
-  proxies_dir = "../proxies"
-  proxies = [
-    { name = "${var.name_prefix}-live", dir = "${local.proxies_dir}/live" },
-    { name = "${var.name_prefix}-sandbox", dir = "${local.proxies_dir}/sandbox" }
-  ]
-}
-
-data "archive_file" "proxies_bundle" {
-  count = length(local.proxies)
-
+data "archive_file" "proxy_bundle" {
   type        = "zip"
-  source_dir = local.proxies[count.index].dir
-  output_path = "./build/${local.proxies[count.index].name}.zip"
+  source_dir = var.proxy.source_dir
+  output_path = "./build/${var.proxy.name}.zip"
 }
 
-resource "apigee_proxy" "example" {
-  count = length(local.proxies)
+resource "apigee_proxy" "proxy" {
+  name = var.proxy.name
+  bundle = "./build/${var.proxy.name}.zip"
+  bundle_hash = data.archive_file.proxy_bundle.output_sha
+}
 
-  name = local.proxies[count.index].name
-  bundle = "./build/${local.proxies[count.index].name}.zip"
-  bundle_hash = data.archive_file.proxies_bundle[count.index].output_sha
+resource "apigee_proxy_deployment" "proxy_deployment" {
+  proxy_name = apigee_proxy.proxy.name
+  environment_name = var.apigee_environment
+  revision = apigee_proxy.proxy.revision
 }
