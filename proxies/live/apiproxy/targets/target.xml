@@ -1,4 +1,4 @@
-<TargetEndpoint name="{{ SERVICE_NAME }}-target">
+<TargetEndpoint name="{{ service_name }}-target">
   <PreFlow>
     <Request>
       <Step>
@@ -28,7 +28,7 @@
         <Enabled>true</Enabled>
       </SSLInfo>
       <LoadBalancer>
-        <Server name="{{ SERVICE_NAME }}" />
+        <Server name="{{ service_name }}" />
       </LoadBalancer>
     </HTTPTargetConnection>
   -->

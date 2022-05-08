@@ -1,4 +1,3 @@
-<APIProxy name="{{ SHORT_SERVICE_NAME }}">
-  <!-- This is the root of the application -->
-  <Description>"{{ SERVICE_NAME }}"</Description>
+<APIProxy name="{{ service_name }}">
+  <Description>"{{ service_name }}"</Description>
 </APIProxy>
