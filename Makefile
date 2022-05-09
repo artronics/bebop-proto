@@ -28,14 +28,14 @@ tmp_data = "./project.yml"
 tmp_out = "./terraform/build/template"
 proxies_dir = "./proxies"
 
-template_proxies:
+template-proxies:
 	rm -rf $(tmp_out)
 	mkdir -p $(tmp_out)
 	bebop template --template $(proxies_dir) --out $(tmp_out)/proxies --var-file $(tmp_data)
 
 aws-login:
-	# TODO: aws_profile here is different from terraform
-	bebop aws login --profile $(aws_profile) -a 347250048819 -u $(aws_user) --out-profile default --mfa $(m)
+	# TODO: aws_profile (jalal.hosseini1) here is different from terraform
+	bebop aws login --profile jalal.hosseini1  -a 347250048819 -u $(aws_user) --out-profile default --mfa $(m)
 
 apigee-login:
 	bebop apigee login --username $(apigee_user)
