@@ -1,9 +1,8 @@
 name: 'PR'
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [closed]
 
 jobs:
   deploy:
@@ -20,8 +19,6 @@ jobs:
       APIGEE_PASSWORD: ${{ secrets.APIGEE_PASSWORD }}
 
     if: github.event.pull_request.merged == true
-
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
