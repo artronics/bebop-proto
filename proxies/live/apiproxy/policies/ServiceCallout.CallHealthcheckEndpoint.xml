@@ -11,7 +11,7 @@
 <!--            <Enabled>true</Enabled>-->
 <!--        </SSLInfo>-->
 <!--        <LoadBalancer>-->
-<!--            <Server name="{{ SERVICE_NAME }}" />-->
+<!--            <Server name="{{ service_name }}" />-->
 <!--        </LoadBalancer>-->
 <!--        <Path>/_ping</Path>-->
 <!--    </HTTPTargetConnection>-->

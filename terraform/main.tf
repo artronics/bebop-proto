@@ -16,6 +16,9 @@ provider "aws" {
   region = "eu-west-2"
   profile = "apim-dev"
 
+#  assume_role {
+#    role_arn = "arn:aws:iam::790083933819:role/NHSDAdminRole"
+#  }
   default_tags {
     tags = {
       project     = var.project

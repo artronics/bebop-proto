@@ -1,5 +1,5 @@
 locals {
-  proxies_dir = "../proxies"
+  proxies_dir = "./build/template/proxies"
   apigee_name_prefix = "${var.project}-${local.apigee_environment}-${local.environment}"
   apigee_display_name_prefix = "${var.project} ${local.apigee_environment} ${local.environment}"
 
@@ -13,7 +13,15 @@ locals {
   }
 }
 
+resource "null_resource" "template_proxies" {
+  provisioner "local-exec" {
+    command = "make -C ../ template-proxies"
+  }
+}
+
 module "apigee" {
+  depends_on = [null_resource.template_proxies]
+
   source = "./apigee"
 
   apigee_environment = local.apigee_environment
