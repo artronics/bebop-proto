@@ -7,13 +7,13 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-nhsd-apim-bebop-infra"
+    bucket = "terraform-nhsd-apim-bebop-proto-infra"
     region = "eu-west-2"
   }
 }
 
 provider "aws" {
-  region = "eu-west-2"
+  region  = "eu-west-2"
   profile = "apim-dev"
 
   default_tags {

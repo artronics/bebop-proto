@@ -1,9 +1,13 @@
 variable "project" {
-  default = "bebop"
+  default = "bebop-proto"
 }
 
 variable "domain_name" {
   default = "dev.api.platform.nhs.uk"
+}
+
+variable "region" {
+  default = "eu-west-2"
 }
 
 variable "environments" {
@@ -11,13 +15,9 @@ variable "environments" {
 }
 
 variable "service" {
-  default = "infra"
+  default = "infra-prot"
 }
 
 locals {
   environment = terraform.workspace
-}
-
-locals {
-  name_prefix = "${var.project}-${var.service}-${local.environment}"
 }
