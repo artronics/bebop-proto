@@ -17,7 +17,7 @@ module "projects" {
   source = "./project"
   count  = length(local.projects)
 
-  environments = var.environments
+  environment = var.environments[0]
 
   account_zone_id = data.aws_route53_zone.account_zone_id.zone_id
   vpc_id          = aws_vpc.bebop-proto.id
