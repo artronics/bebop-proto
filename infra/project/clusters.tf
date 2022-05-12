@@ -84,6 +84,7 @@ resource "aws_iam_role_policy_attachment" "ecs_event_stream" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+# FIXME: This dashboard is empty all the time!
 # cloudwatch dashboard with logs insights query
 resource "aws_cloudwatch_dashboard" "ecs-event-stream" {
   dashboard_name = "${local.name_prefix}-ecs-event-stream"

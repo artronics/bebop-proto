@@ -13,4 +13,3 @@ resource "aws_subnet" "subnets" {
     Name = "${var.project.name}-${local.subnets[count.index].private ? "private" : "public"}-${local.subnets[count.index].availability_zone}"
   }
 }
-
