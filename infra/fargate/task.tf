@@ -1,3 +1,6 @@
+locals {
+  sandbox_image = "790083933819.dkr.ecr.eu-west-2.amazonaws.com/bars-mock-receiver-jaho3-ecr-sandbox:latest"
+}
 resource "aws_ecs_task_definition" "mock-receiver" {
   family                   = "${local.name_prefix}-task"
   network_mode             = "awsvpc"
@@ -11,9 +14,9 @@ resource "aws_ecs_task_definition" "mock-receiver" {
 
   container_definitions = jsonencode([
     {
-      name      = "rest-api"
+      name      = "sandbox"
       #      image     = local.sandbox_image
-      image     = "vad1mo/hello-world-rest"
+      image     = local.sandbox_image
       essential = true
 
       portMappings = [
@@ -42,6 +45,43 @@ resource "aws_iam_role" "task_execution_role" {
       "Sid": ""
     }
   ]
+}
+EOF
+}
+resource "aws_iam_role_policy" "main_ecs_tasks" {
+  name = "${local.name_prefix}-policy"
+  role = aws_iam_role.task_execution_role.id
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": ["*"]
+        },
+        {
+            "Effect": "Allow",
+            "Resource": [
+              "*"
+            ],
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:DescribeLogStreams"
+            ]
+        }
+    ]
+
 }
 EOF
 }
