@@ -13,19 +13,24 @@ locals {
   ]
 }
 
-module "projects" {
-  source = "./project"
-  count  = length(local.projects)
 
-  environment = var.environments[0]
+module "fargate" {
+  source      = "./fargate"
+  region      = var.region
+  name_prefix = local.name_prefix
 
-  account_zone_id = data.aws_route53_zone.account_zone_id.zone_id
-  vpc_id          = aws_vpc.bebop-proto.id
-
-  project = local.projects[count.index]
-}
-
-output "projects_zone" {
-  value = module.projects
+  vpc_id  = aws_vpc.bebop-proto.id
+  subnets = [
+    {
+      cidr              = cidrsubnet(local.vpc_cidr, 8, 101)
+      availability_zone = "eu-west-2a"
+    }, {
+      cidr              = cidrsubnet(local.vpc_cidr, 8, 102)
+      availability_zone = "eu-west-2b"
+    }, {
+      cidr              = cidrsubnet(local.vpc_cidr, 8, 103)
+      availability_zone = "eu-west-2c"
+    }
+  ]
 }
 

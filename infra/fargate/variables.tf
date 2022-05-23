@@ -1,12 +1,8 @@
-variable "project" {}
-variable "environment" {}
+variable "region" {}
 
 variable "vpc_id" {}
-variable "internet_gateway_id" {}
 
-locals {
-  name_prefix = "${var.project}-${var.environment}"
-}
+variable "name_prefix" {}
 
 variable "subnets" {
   type = list(object({

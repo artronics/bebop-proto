@@ -1,11 +1,9 @@
-variable "name_prefix" {}
-
-variable "cluster_arn" {}
-
 /*
 Monitoring Cluster: A cluster event will trigger a lambda which log the event to it's standard output. Then a cloudwatch
 log will log that event
 */
+
+// FIXME: log group for this cluster doesn't have retention. We should set it otherwise logs never gets deleted
 
 resource "aws_cloudwatch_event_rule" "ecs_event_stream" {
   name        = "${var.name_prefix}-ecs-event-stream"
@@ -14,7 +12,7 @@ resource "aws_cloudwatch_event_rule" "ecs_event_stream" {
   event_pattern = <<PATTERN
   {
     "detail": {
-      "clusterArn": ["${var.cluster_arn}"]
+      "clusterArn": ["${aws_ecs_cluster.fargate-cluster.arn}"]
     }
   }
 PATTERN
@@ -31,7 +29,7 @@ locals {
 
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file = "project/lambda/${local.lambda_file_name}.js"
+  source_file = "${path.module}/lambda/${local.lambda_file_name}.js"
   output_path = "build/ecs_event_logger_lambda.zip"
 }
 

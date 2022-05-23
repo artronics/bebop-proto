@@ -1,5 +1,5 @@
 variable "project" {
-  default = "bebop-proto"
+  default = "barz-proto"
 }
 
 variable "domain_name" {
@@ -15,12 +15,14 @@ variable "environments" {
 }
 
 variable "service" {
-  default = "infra-prot"
+  default = "barz_proto"
 }
 
 locals {
   environment = terraform.workspace
+  name_prefix = "${var.project}-${var.environments[0]}"
 }
+
 
 variable "vpc_cidr" {
   default = "10.1.0.0/16"
