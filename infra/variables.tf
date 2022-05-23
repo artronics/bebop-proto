@@ -23,6 +23,9 @@ locals {
   name_prefix = "${var.project}-${var.environments[0]}"
 }
 
+variable "registries" {
+  default = ["mock-receiver"]
+}
 
 variable "vpc_cidr" {
   default = "10.1.0.0/16"

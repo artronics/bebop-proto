@@ -1,3 +1,6 @@
+variable "region" {
+  default = "eu-west-2"
+}
 variable "project" {
   default = "barz"
 }
@@ -15,9 +18,9 @@ locals {
 }
 
 locals {
-  environment = terraform.workspace
+  environment      = terraform.workspace
   valid_infra_envs = ["dev"]
-  infra_env = contains(local.valid_infra_envs, local.environment) ? local.environment : "dev"
+  infra_env        = contains(local.valid_infra_envs, local.environment) ? local.environment : "dev"
 }
 
 
