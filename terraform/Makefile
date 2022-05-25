@@ -16,7 +16,7 @@ test:
 clean:
 	rm -rf build .terraform upload-key
 
-mock_receiver_repository_name = bars-infra-dev-mock-receiver
+mock_receiver_repository_name = barz-proto-dev-mock-receiver
 mock_receiver_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_receiver_repository_name)
 
 docker-build-sandbox:

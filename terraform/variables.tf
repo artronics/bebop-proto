@@ -25,7 +25,8 @@ locals {
 
 
 locals {
-  service_domain_name = "${local.environment}.api.${var.domain_name}"
+  #  service_domain_name = "${local.environment}.${var.domain_name}"
+  account_domain = "dev.api.platform.nhs.uk"
 }
 
 locals {

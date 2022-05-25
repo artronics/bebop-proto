@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "mock-receiver" {
 
   container_definitions = jsonencode([
     {
-      name      = "barz-receiver"
+      name      = "mock-receiver"
       image     = "${var.repository_url}:${var.image_version}"
       essential = true
 

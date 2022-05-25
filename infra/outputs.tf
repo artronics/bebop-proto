@@ -17,3 +17,11 @@ output "fargate_repository_url" {
 output "fargate_repository_name" {
   value = {for reg in var.registries : reg => aws_ecr_repository.fargate_registry[index(var.registries, reg)].name}
 }
+
+output "alb_arn" {
+  value = module.alb.alb_arn
+}
+
+output "vpc_link_id" {
+  value = aws_apigatewayv2_vpc_link.alb_vpc_link.id
+}

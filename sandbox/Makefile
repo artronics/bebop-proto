@@ -6,3 +6,4 @@ docker-build: copy-examples
 
 docker-run:
 	docker run -it -e PORT=9000 -p 9000:9000 bars-sandbox
+

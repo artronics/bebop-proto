@@ -1,5 +1,6 @@
 module "alb" {
   source            = "./alb"
   name_prefix       = local.name_prefix
-  public_subnet_ids = aws_subnet.public_subnets[*].id
+  vpc_id            = aws_vpc.bebop-proto.id
+  public_subnet_ids = module.subnets[*].subnet_id
 }

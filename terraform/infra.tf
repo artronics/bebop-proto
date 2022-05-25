@@ -25,3 +25,8 @@ locals {
   mock_receiver_repository_url  = local.fargate_repository_url[local.repositories[0]]
   mock_receiver_repository_name = local.fargate_repository_name[local.repositories[0]]
 }
+
+locals {
+  alb_arn     = data.terraform_remote_state.barz-infra.outputs.alb_arn
+  vpc_link_id = data.terraform_remote_state.barz-infra.outputs.vpc_link_id
+}
